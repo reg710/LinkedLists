@@ -2,7 +2,7 @@
 
 For AcademyPGH Bookclub, I wanted to learn more about linked lists - exploring how they work and different implementation examples.
 
-* `linked_list.rb` is an implementation of a singly linked list with two classes-node and linked list.
+* `linked_list.rb` is a WIP implementation of a singly linked list with two classes-node and linked list.
 * `linked_list_spec.rb` contains unit tests
 
 ### Resources
