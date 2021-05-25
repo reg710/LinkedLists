@@ -93,4 +93,29 @@ describe LinkedList do
             expect(list.print_list).to eql "test -> second -> third"
         end
     end
+
+    context "#value_at" do
+
+        it "can return first node value" do
+            list = LinkedList.new("test")
+            expect(list.value_at(0)). to eql "test"
+        end
+
+        it "can return second node value" do
+            list = LinkedList.new("test")
+            list.add("second")
+            expect(list.value_at(1)). to eql "second"
+        end
+
+        it "can return third node value" do
+            list = LinkedList.new("test")
+            list.add("third")
+            expect(list.value_at(2)). to eql "third"
+        end
+
+        it "returns error if index is out of bounds" do
+            list = LinkedList.new("test")
+            expect(list.value_at(2)). to eql "none found"
+        end
+    end
 end
