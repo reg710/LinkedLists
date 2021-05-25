@@ -72,4 +72,25 @@ describe LinkedList do
             expect(list.find_final.next_node).to eql nil
         end
     end
+
+    context "#print_list" do
+        
+        it "can print out single node value" do
+            list = LinkedList.new("test")
+            expect(list.print_list).to eql "test"
+        end
+
+        it "can print out two node values" do
+            list = LinkedList.new("test")
+            list.add("second")
+            expect(list.print_list).to eql "test -> second"
+        end
+
+        it "can print out three node values" do
+            list = LinkedList.new("test")
+            list.add("second")
+            list.add("third")
+            expect(list.print_list).to eql "test -> second -> third"
+        end
+    end
 end
