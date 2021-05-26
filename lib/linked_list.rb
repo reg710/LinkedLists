@@ -68,9 +68,7 @@ class LinkedList
         previous_node = node_at(index - 1)
         after_node = node_at(index + 1)
         if node_at(index) != nil
-            if index == 0 && @first.next_node == nil
-                @first = nil
-            elsif index == 0 
+            if index == 0 
                 @first = @first.next_node
             else
                 previous_node.next_node = after_node
