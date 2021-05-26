@@ -3,8 +3,8 @@
 #   [x] Find last node in the list 
 #   [x] Print out list of nodes
 #   [x] Return node value by location
+#   [x] Delete node at location
 #   [] Return node value before/after value
-#   [] Delete node at location
 #   [] Delete node by value
 
 class Node
@@ -47,18 +47,40 @@ class LinkedList
         return output.join(" -> ")      
     end
 
-    def value_at(index)
+    def node_at(index)
         current_node = @first  
         while index > 0
             if current_node.next_node == nil && index > 1
-                return "none found"
+                return nil
             elsif current_node.next_node !=nil
                 current_node = current_node.next_node
             end
             index -= 1         
         end
-        return current_node.value
+        return current_node
+    end
+
+    def value_at(index)
+        node_at(index) == nil ? "none found" : node_at(index).value
+    end
+
+    def delete_at(index)
+        previous_node = node_at(index - 1)
+        after_node = node_at(index + 1)
+        if node_at(index) != nil
+            if index == 0 && @first.next_node == nil
+                @first = nil
+            elsif index == 0 
+                @first = @first.next_node
+            else
+                previous_node.next_node = after_node
+            end
+        else
+            return "none found"
+        end
     end
 end
+
+
 
 
