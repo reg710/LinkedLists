@@ -2,7 +2,7 @@
 #   [x] Add new node at the end
 #   [x] Find last node in the list 
 #   [x] Print out list of nodes
-#   [] Return node value by location
+#   [x] Return node value by location
 #   [] Return node value before/after value
 #   [] Delete node at location
 #   [] Delete node by value
@@ -25,11 +25,7 @@ class LinkedList
     end
 
     def add(info)
-        if @first
-            find_final.next_node = Node.new(info)
-        else
-            @first = Node.new(info)
-        end
+        find_final.next_node = Node.new(info)
     end
 
     def find_final
@@ -42,22 +38,22 @@ class LinkedList
 
     def print_list
         current_node = @first
+        last_node = find_final
         output = []
-        while current_node != find_final
+        while current_node != last_node
             output << current_node.value
             current_node = current_node.next_node
         end
-        output << find_final.value
+        output << last_node.value
         return output.join(" -> ")      
     end
 
     def value_at(index)
         current_node = @first  
         while index > 0
-            if current_node == find_final && index > 1
+            if current_node.next_node == nil && index > 1
                 return "none found"
-            end 
-            if current_node.next_node !=nil
+            elsif current_node.next_node !=nil
                 current_node = current_node.next_node
             end
             index -= 1         
