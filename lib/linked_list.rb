@@ -38,13 +38,12 @@ class LinkedList
 
     def print_list
         current_node = @first
-        last_node = find_final
         output = []
-        while current_node != last_node
+        while current_node.next_node != nil
             output << current_node.value
             current_node = current_node.next_node
         end
-        output << last_node.value
+        output << find_final.value
         return output.join(" -> ")      
     end
 
