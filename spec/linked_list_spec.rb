@@ -103,8 +103,8 @@ describe LinkedList do
 
         it "can return second node" do
             list = LinkedList.new("test")
-            added_node = list.add("second")
-            expect(list.node_at(1)).to eql added_node
+            second_node = list.add("second")
+            expect(list.node_at(1)).to eql second_node
         end
 
         it "can return third node" do
@@ -112,6 +112,16 @@ describe LinkedList do
             list.add("second")
             third_node = list.add("third")
             expect(list.node_at(2)).to eql third_node
+        end
+
+        it "returns nil if index is one out of bounds" do
+            list = LinkedList.new("test")
+            expect(list.node_at(1)).to eql nil
+        end
+
+        it "returns nil if index is two out of bounds" do
+            list = LinkedList.new("test")
+            expect(list.node_at(2)).to eql nil
         end
 
     end
@@ -158,20 +168,72 @@ describe LinkedList do
             expect(list.first.next_node).to eql nil
         end
 
+        it "can remove second node from a two node list" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            list.delete_at(1)
+            expect(list.first.value).to eql "test"
+            expect(list.first.next_node).to eql nil
+        end
+
         it "can remove third node from a four node list" do
             list = LinkedList.new("test")
-            second = list.add("second")
-            third = list.add("third")
-            fourth = list.add("fourth")
+            second_node = list.add("second")
+            third_node = list.add("third")
+            fourth_node = list.add("fourth")
             list.delete_at(2)
             expect(list.value_at(2)).to eql "fourth"
-            expect(list.node_at(2)).to eql fourth
+            expect(list.node_at(2)).to eql fourth_node
+        end
+
+        it "can remove fourth node from a four node list" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            third_node = list.add("third")
+            fourth_node = list.add("fourth")
+            list.delete_at(3)
+            expect(list.node_at(2)).to eql third_node
+            expect(third_node.next_node).to eql nil
         end
 
         it "returns error if index is out of bounds" do
             list = LinkedList.new("test")
             expect(list.delete_at(2)).to eql "none found"
         end
+    end
 
+    context "#first_node_with" do
+        
+        it "returns first node in one node list" do
+            list = LinkedList.new("test")
+            expect(list.first_node_with("test")).to eql list.first
+        end
+
+        it "returns second node in two node list" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            expect(list.first_node_with("second")).to eql second_node
+        end
+
+        it "returns second node in three node list" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            third_node = list.add("third")
+            expect(list.first_node_with("second")).to eql second_node
+        end
+        
+        it "returns third node in three node list" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            third_node = list.add("third")
+            expect(list.first_node_with("third")).to eql third_node
+        end
+        
+        it "returns error if value is not found" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            third_node = list.add("third")
+            expect(list.first_node_with("peanut")).to eql "none found"
+        end
     end
 end

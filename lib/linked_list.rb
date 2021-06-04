@@ -4,8 +4,11 @@
 #   [x] Print out list of nodes
 #   [x] Return node value by location
 #   [x] Delete node at location
+#   [x] Find node by value
 #   [] Return node value before/after value
+#       - If there are multiple matching values, look only at first
 #   [] Delete node by value
+#   [] In a pre-sorted/empty list, insert new value in sorted order
 
 class Node
     attr_accessor :value
@@ -50,9 +53,9 @@ class LinkedList
     def node_at(index)
         current_node = @first  
         while index > 0
-            if current_node.next_node == nil && index > 1
+            if current_node.next_node == nil
                 return nil
-            elsif current_node.next_node !=nil
+            else
                 current_node = current_node.next_node
             end
             index -= 1         
@@ -77,8 +80,16 @@ class LinkedList
             return "none found"
         end
     end
+
+    def first_node_with(value)
+        current_node = @first  
+        while current_node.value != value
+            if current_node.next_node == nil
+                return "none found"
+            else
+                current_node = current_node.next_node
+            end        
+        end
+        return current_node
+    end
 end
-
-
-
-
