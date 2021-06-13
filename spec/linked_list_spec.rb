@@ -152,18 +152,18 @@ describe LinkedList do
         end
     end
 
-    context "#delete_at" do
+    context "#remove_at" do
         
         it "can remove one node from a one node list" do
             list = LinkedList.new("test")
-            list.delete_at(0)
+            list.remove_at(0)
             expect(list.first).to eql nil
         end
 
         it "can remove first node from a two node list" do
             list = LinkedList.new("test")
             second_node = list.add("second")
-            list.delete_at(0)
+            list.remove_at(0)
             expect(list.first.value).to eql "second"
             expect(list.first.next_node).to eql nil
         end
@@ -171,7 +171,7 @@ describe LinkedList do
         it "can remove second node from a two node list" do
             list = LinkedList.new("test")
             second_node = list.add("second")
-            list.delete_at(1)
+            list.remove_at(1)
             expect(list.first.value).to eql "test"
             expect(list.first.next_node).to eql nil
         end
@@ -181,7 +181,7 @@ describe LinkedList do
             second_node = list.add("second")
             third_node = list.add("third")
             fourth_node = list.add("fourth")
-            list.delete_at(2)
+            list.remove_at(2)
             expect(list.value_at(2)).to eql "fourth"
             expect(list.node_at(2)).to eql fourth_node
         end
@@ -191,14 +191,14 @@ describe LinkedList do
             second_node = list.add("second")
             third_node = list.add("third")
             fourth_node = list.add("fourth")
-            list.delete_at(3)
+            list.remove_at(3)
             expect(list.node_at(2)).to eql third_node
             expect(third_node.next_node).to eql nil
         end
 
         it "returns error if index is out of bounds" do
             list = LinkedList.new("test")
-            expect(list.delete_at(2)).to eql "none found"
+            expect(list.remove_at(2)).to eql "none found"
         end
     end
 
@@ -235,5 +235,66 @@ describe LinkedList do
             third_node = list.add("third")
             expect(list.first_node_with("peanut")).to eql "none found"
         end
+    end
+
+    context "#value_before" do
+        
+        it "returns first node when searching second node value" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            expect(list.value_before("second")).to eql "test"
+        end
+
+        it "returns second node when searching third node value" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            third_node = list.add("third")
+            expect(list.value_before("third")).to eql "second"
+        end
+
+        it "returns error if first node matches value searched" do
+            list = LinkedList.new("test")
+            expect(list.value_before("test")).to eql "none found"
+        end
+
+        it "returns error if value is not found" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            third_node = list.add("third")
+            expect(list.value_before("cashew")).to eql "none found"
+        end
+    end
+
+    context "#value_after" do
+        
+        it "returns second node when searching first node value" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            expect(list.value_after("test")).to eql "second"
+        end
+
+        it "returns third node when searching second node value" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            third_node = list.add("third")
+            expect(list.value_after("second")).to eql "third"
+        end
+
+        it "returns error if last node matches value searched" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            third_node = list.add("third")
+            expect(list.value_after("third")).to eql "none found"
+        end
+
+        it "returns error if value is not found" do
+            list = LinkedList.new("test")
+            second_node = list.add("second")
+            third_node = list.add("third")
+            expect(list.value_after("cashew")).to eql "none found"
+        end
+    end
+
+    context "#delete" do
     end
 end

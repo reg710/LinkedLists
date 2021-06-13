@@ -5,7 +5,7 @@
 #   [x] Return node value by location
 #   [x] Delete node at location
 #   [x] Find node by value
-#   [] Return node value before/after value
+#   [x] Return node value before/after value
 #       - If there are multiple matching values, look only at first
 #   [] Delete node by value
 #   [] In a pre-sorted/empty list, insert new value in sorted order
@@ -67,7 +67,7 @@ class LinkedList
         node_at(index) == nil ? "none found" : node_at(index).value
     end
 
-    def delete_at(index)
+    def remove_at(index)
         previous_node = node_at(index - 1)
         after_node = node_at(index + 1)
         if node_at(index) != nil
@@ -91,5 +91,37 @@ class LinkedList
             end        
         end
         return current_node
+    end
+
+    def value_before(value)
+        current_node = @first
+        previous_node = ""
+        if current_node.value == value
+            return "none found"
+        end
+        while current_node.value != value
+            if current_node.next_node == nil
+                return "none found"
+            else
+                previous_node = current_node
+                current_node = current_node.next_node
+            end        
+        end
+        return previous_node.value
+    end
+
+    def value_after(value)
+        current_node = @first
+        while current_node.value != value
+            if current_node.next_node == nil
+                return "none found"
+            else
+                current_node = current_node.next_node
+            end        
+        end
+        current_node.next_node == nil ? "none found" : current_node.next_node.value
+    end
+
+    def remove(value)
     end
 end
